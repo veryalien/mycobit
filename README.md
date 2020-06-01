@@ -223,6 +223,7 @@ If you go into the editor (reset with button B pressed) you'll now see the first
 ``. . O . .`` <br/>
 ``. . O . O`` <br/>
 ``. . . . O`` <br/>
+``. . . . .`` <br/>
 
 6 - A= ... <br/>
 4 - Din - read the digital input pins (to select the relevant demo)

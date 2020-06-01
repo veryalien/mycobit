@@ -137,6 +137,30 @@ You're now in the editor which shows your stored program.
 
 Enjoy!
 
+# Example Program - binary counter
+
+Here's a very simple little example program just to give you a taste of programming mycobit with a bit of action.
+It will show a little binary counter on the top row of the display.
+
+Enter the following sequence of nibble values in the editor:
+
+5 - move the contents of register A to ...
+4 - the display
+
+7 - A = ...
+1 - A + 1
+
+2 - wait ...
+8 - 500 ms
+
+3 - relative jump backwards
+3 - 3 bytes (jump to the first instruction '54')
+
+Save the program and watch the binary numbers cycle around from 0 to 15, forever!
+
+You can edit the program and change the wait time between counts from 0 = 1 ms to 15 = 60s.
+
+
 # What do all those mycobit instructions do?
 
 Good question, more info coming soon!

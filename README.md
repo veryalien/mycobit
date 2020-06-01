@@ -217,6 +217,19 @@ mycobit will now load the default programs from the file 'default' into the 'myc
 
 If you see the top row left and right pixels blinking then it's working! Without any breakout board, it won't help much to begin with.
 
+If you go into the editor (reset with button B pressed) you'll now see the first four nibbles of the demo program instead of 0xF 0xF 0xF 0xF.
+
+``. . O O .`` <br/>
+``. . O . .`` <br/>
+``. . O . O`` <br/>
+``. . . . O`` <br/>
+
+6 - A= ... <br/>
+4 - Din - read the digital input pins (to select the relevant demo)
+
+5 - move the contents of register A to ... <br/>
+1 - register B
+
 You can now continue using mycobit as before, you can browse through the demo programs and try to work out what they do. Read the MyCo documents which explains them in detail. Otherwise you can just go into the editor and overwrite the demo program code with your own.
 
 If you ever need to get back to a known state just follow these instructions again and the default programs will be re-loaded.

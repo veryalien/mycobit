@@ -142,18 +142,18 @@ Enjoy!
 Here's a very simple little example program just to give you a taste of programming mycobit with a bit of action.
 It will show a little binary counter on the top row of the display.
 
-Enter the following sequence of nibble values in the editor:
+Enter the following sequence of binary nibble values in the editor:
 
-5 - move the contents of register A to ...
+5 - move the contents of register A to ... <br/>
 4 - the display
 
-7 - A = ...
+7 - A = ... <br/>
 1 - A + 1
 
-2 - wait ...
+2 - wait ... <br/>
 8 - 500 ms
 
-3 - relative jump backwards
+3 - relative jump backwards <br/>
 3 - 3 bytes (jump to the first instruction '54')
 
 Save the program and watch the binary numbers cycle around from 0 to 15, forever!

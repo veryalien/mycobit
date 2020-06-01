@@ -1,4 +1,5 @@
 # mycobit
+
 A 4-bit computer system for the microbit.
 
 Mycobit is a microbit implementation of the MyCo (My little Computer) system, also known in german as TPS (Tastenprogrammierbare Steuerung).
@@ -36,9 +37,11 @@ There are a couple of enhanced shift and rotate instructions commented out in th
 I've also made an (unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which includes these new instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython.
 
 # Getting Started
+
 A quick start-up guide to getting mycobit running on your microbit.
 
 # Installation
+
 The initial version of mycobit is written in micropython, not makecode.
 So you'll need an editor for vanilla microbit micropython.
 
@@ -166,7 +169,7 @@ Enter the following sequence of binary nibble values in the editor:
 2 - wait ... <br/>
 8 - 500 ms
 
-3 - relative jump backwards <br/>
+3 - relative jump backwards ... <br/>
 3 - 3 bytes (jump to the first instruction '54')
 
 Save the program and watch the binary numbers cycle around from 0 to 15, forever!
@@ -180,7 +183,46 @@ Good question, more info coming soon!
 
 See mycobit_info.pdf for the complete, but mostly unexplained, instruction set.
 
+# 'Default' MyCo/TPS programs
+
+Note: To make full use of the demo programs you will need some kind of breakout board (bob) for your bit, so you can access all of the pins on the edge connector. Without any breakout board you'll just see some blinking leds as that is the default MyCo/TPS demo without any input pins set to the correct state.
+
+The original MyCo/TPS system came with a set of built-in demo programs and subroutines.
+You can find exactly the same mycobit programs here in the file called 'default'.
+
+MyCo/TPS has a nifty way to get back to a known state by re-loading the original demo programs from a hidden part of memory.
+This behaviour is also implemented in mycobit, but you need to copy the 'default' file to the microbit.
+The easiest way is to get the 'default' file from this repository and copy it to your mu-code directory.
+
+Use the mu files tab to show the files on your microbit. On the left you'll see the list of files on your microbit, most probably just main.py (mycobit.py is renamed after it's copied) and any programs you've saved in the file 'mycobit'.
+ Programs are saved and loaded to and from the microbit micropython file system using a file called 'mycobit'.
+
+On the right side, mu will show the list of files on your computer, if you've copied 'default' to your mu-code directory it will appear here.
+
+Drag the 'default' file onto the microbit file list. It will be copied over to the microbit. You only have to do this once, or after you've been using your microbit for other things and the micropython file system got re-flashed.
+
+Now you can use the editor to load the default mycobit programs whenever you want, this will however completely overwrite any stored programs in the file 'mycobit'.
+
+Reloading the default programs is as simple as going into the editor and setting the first four nibbles of memory to 15 (0x0F). Go into the mycobit editor and set everything to 1 bits, it will end up looking like this:
+
+``o O O O O`` <br/>
+``. O O O O`` <br/>
+``. O O O O`` <br/>
+``. O O O O`` <br/>
+``. . . . .`` <br/>
+
+Now press and hold button B, while holding press button A. This will save 0xFF 0xFF as a program, but when this is reloaded mycobit will see it as a magic reset number. 0xFF 0xFF can never occur as the first two bytes in a real mycobit program.
+
+mycobit will now load the default programs from the file 'default' into the 'mycobit' file. You've lost your program, but now you've got the demo programs loaded - more details on using the demos coming soon!
+
+If you see the top row left and right pixels blinking then it's working! Without any breakout board, it won't help much to begin with.
+
+You can now continue using mycobit as before, you can browse through the demo programs and try to work out what they do. Read the MyCo documents which explains them in detail. Otherwise you can just go into the editor and overwrite the demo program code with your own.
+
+If you ever need to get back to a known state just follow these instructions again and the default programs will be re-loaded.
+
+
 # Can mycobit use the edge connector pins on the microbit?
 
-It can and it does both analogue and digital inputs and outputs are supported. 
+It can and it does, both analogue and digital inputs and outputs are supported. 
 

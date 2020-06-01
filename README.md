@@ -1,6 +1,27 @@
 # mycobit
 A 4-bit computer system for the microbit.
 
+Mycobit is a microbit implementation of the MyCo (My little Computer) system, also known in german as TPS (Tastenprogrammierbare Steuerung).
+
+You can create, save and run useful programs directly on the microbit, without needing a computer connected at all.
+Once mycobit has been installed on the microbit you can program using only the three buttons A, B and reset!
+
+For a complete guide to MyCo/TPS you can have a look at the german site: http://www.elektronik-labor.de/Lernpakete/TPS/TPS0.html
+
+At that site you'll see that TPS has a long history, going back over a number of years.
+
+I bought this [Microcontroller Pack](https://www.conrad.com/p/conrad-components-10104-profi-mikrocontroller-course-material-14-years-and-over-192286 "Conrad TPS Pack") from Conrad and I was hooked.
+
+I apolgise profusely for the state of the 'denglisch' on the Conrad page, it might be actually be 'double Dutch', but never mind!
+
+I live in Germany (over 20 years), so it's not that much of a problem for me to understand the original documentation.
+
+For a lot of useful information in english I suggest that you download this pdf: http://www.elektronik-labor.de/Literatur/MyCo2014.pdf
+
+Please note that the instruction table is very strangely formatted and doesn't contain all of the proper instruction descriptions.
+
+That is a free excerpt from a complete instruction manual which you can still purchase from amazon.
+
 # Getting Started
 A quick start-up guide to getting mycobit running on your microbit.
 

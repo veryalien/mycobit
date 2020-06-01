@@ -47,7 +47,7 @@ Reset the microbit with button B held down to get back into the editor at byte 0
 
 Instructions go in the first nibble of each byte.
 
-Press button A twice so the value 1 is shown on the top row of leds: . . . . O
+Press button A twice so the value 1 is shown on the top row of leds: ``. . . . O``
 The first press puts zero in the nibble, which you obviously can't see.
 The instruction 1 shows a value on the display at runtime.
 
@@ -56,14 +56,14 @@ Press button B (don't hold) to highlight the second nibble.
 Data values go in the second nibble of each byte.
 For instruction 1, the data will be the value displayed.
 
-Press button A until the value 10 (0x0A) is displayed: . O . O .
+Press button A until the value 10 (0x0A) is displayed: ``. O . O .``
 That will be 11 individual presses - including zero at the start.
  
 The second instruction will be a relative jump to itself to 'stop' the program.
 
 Press button B to highlight the third row of leds, the top left led lights up, we are editing byte 1.
 
-Press button A until the value 3 is displayed: . . . X X
+Press button A until the value 3 is displayed: ``. . . X X``
 
 Press button B to highlight the fourth row of leds.
 
@@ -71,21 +71,21 @@ Press button A once, not really needed when the memory is empty, but this puts z
 
 Now your complete microbit display should look like this (including the memory counters):
 
-o . . . O <br/>
-. O . O . <br/>
-. . . O O <br/>
-. . . . . <br/>
-. . . . . <br/>
+``o . . . O`` <br/>
+``. O . O .`` <br/>
+``. . . O O`` <br/>
+``. . . . .`` <br/>
+``. . . . .`` <br/>
 
 Note that the memory counters are shown dimmer than the contents of memory.
 
 The overall editor display looks like this:
 
-b . . . . <br/>
-y . . . . <br/>
-t . . . . <br/>
-e . . . . <br/>
-. e g a p <br/>
+``b . . . .`` <br/>
+``y . . . .`` <br/>
+``t . . . .`` <br/>
+``e . . . .`` <br/>
+``. e g a p`` <br/>
 
 egap is page backwards as we count the bytes from right to left!
 
@@ -99,7 +99,7 @@ While holding down button B, hold down button A until the display clears.
 The program has now been saved in the microbit.
 Release both buttons.
 
-If everything worked correctly you'll see the value 10 (0x0A) displayed on the lop row of leds: . O . O .
+If everything worked correctly you'll see the value 10 (0x0A) displayed on the lop row of leds: ``. O . O .``
 
 Wow, amazing, it worked!
 
@@ -119,6 +119,8 @@ Enjoy!
 # What do all those mycobit instructions do?
 
 Good question, more info coming soon!
+
+See mycobit_info.pdf for the complete, but mostly unexplained, instruction set.
 
 # Can mycobit use the edge connector pins on the microbit?
 

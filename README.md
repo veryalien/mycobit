@@ -22,6 +22,19 @@ Please note that the instruction table is very strangely formatted and doesn't c
 
 That is a free excerpt from a complete instruction manual which you can still purchase from amazon.
 
+Mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements to support the larger microbit display and available memory. The input and output pins have been assigned according to the microbit edge connector analogue and digital pins.
+
+# Limitations
+
+The '4 bit' implementation was strictly observed, the microbit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is also not available.
+
+No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C will probably not be supported.
+
+Unfortunately micropython on the microbit's nrf51822 doesn't leave much memory free and it was a struggle to get the final mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
+There are a couple of enhanced shift and rotate instructions commented out in the code as they simply make the python too large or complex for it to be successfully compiled to byte-code when loaded.
+
+I've also made an (unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which includes these new instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython.
+
 # Getting Started
 A quick start-up guide to getting mycobit running on your microbit.
 
@@ -47,7 +60,7 @@ The highlighted leds are the editor 'cursor'. Showing you which nibble is to be 
 
 Press and release button A and nothing happens!? Actually zero was put in the frst nibble.
 
-Press and release button A again and one led  will be displayed in the top right-hand corner of the display. Now the value one is in the first nibble.
+Press and release button A again and one led  will be displayed in the top right-hand corner of the display. Now the value 1 is in the first nibble.
 Hold button A down and it will cycle through all 16 values. Wow, action!
 
 Pressing button B will move to the next nibble, it will be highlighted with the cursor.
@@ -84,7 +97,7 @@ The second instruction will be a relative jump to itself to 'stop' the program.
 
 Press button B to highlight the third row of leds, the top left led lights up, we are editing byte 1.
 
-Press button A until the value 3 is displayed: ``. . . X X``
+Press button A until the value 3 is displayed: ``. . . O O``
 
 Press button B to highlight the fourth row of leds.
 
@@ -108,10 +121,10 @@ The overall editor display looks like this:
 ``e . . . .`` <br/>
 ``. e g a p`` <br/>
 
-egap is page backwards as we count the bytes from right to left!
+'egap' is page backwards as we count the bytes from right to left to match the way nibble values are displayed!
 
 
-# Saving and Running that first program!
+# Saving and running that first program
 
 We've got a program in the editor, but now we need to run it.
 First, you need to save that program to the microbit flash.
@@ -139,7 +152,7 @@ Enjoy!
 
 # Example Program - binary counter
 
-Here's a very simple little example program just to give you a taste of programming mycobit with a bit of action.
+Here's a very simple little example program just to give you a taste of programming mycobit with a bit more action.
 It will show a little binary counter on the top row of the display.
 
 Enter the following sequence of binary nibble values in the editor:

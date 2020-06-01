@@ -71,21 +71,21 @@ Press button A once, not really needed when the memory is empty, but this puts z
 
 Now your complete microbit display should look like this (including the memory counters):
 
-o . . . O
-. O . O .
-. . . O O
-. . . . .
-. . . . .
+o . . . O <br/>
+. O . O . <br/>
+. . . O O <br/>
+. . . . . <br/>
+. . . . . <br/>
 
 Note that the memory counters are shown dimmer than the contents of memory.
 
 The overall editor display looks like this:
 
-b . . . .
-y . . . .
-t . . . .
-e . . . .
-. e g a p
+b . . . . <br/>
+y . . . . <br/>
+t . . . . <br/>
+e . . . . <br/>
+. e g a p <br/>
 
 egap is page backwards as we count the bytes from right to left!
 

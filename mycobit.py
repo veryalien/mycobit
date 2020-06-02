@@ -104,6 +104,12 @@ def run():
     Row=0
 
     wait=[1,2,5]
+    Dout=[pin12, pin8, pin2, pin1]
+
+    pin16.set_pull(pin16.PULL_UP)
+    pin15.set_pull(pin15.PULL_UP)
+    pin14.set_pull(pin14.PULL_UP)
+    pin13.set_pull(pin13.PULL_UP)
 
     if p[0]==0xFF and p[1]==0xFF:
         load(DFLT)
@@ -160,13 +166,10 @@ def run():
             elif DATA==0x09:
                 pin0.write_analog((A*64)%1023)
             elif DATA==0x0A:
-                pin1.write_digital((A>>3)&0x01)
-            elif DATA==0x0B:
-                pin2.write_digital((A>>2)&0x01)
-            elif DATA==0x0C:
-                pin8.write_digital((A>>1)&0x01)
-            elif DATA==0x0D:
-                pin12.write_digital(A&0x01)
+                for i in range(0,4):
+                    Dout[i].write_digital((A>>i)&0x01)
+            elif DATA>=0x0B and DATA<=0x0E:
+                Dout[DATA-0X0B].write_digital(A&0x01)
 
         elif INST==0x06:
             if DATA==0x00:
@@ -271,11 +274,6 @@ def run():
             continue
 
         PC=(PC+1)%256
-
-pin16.set_pull(pin16.PULL_UP)
-pin15.set_pull(pin15.PULL_UP)
-pin14.set_pull(pin14.PULL_UP)
-pin13.set_pull(pin13.PULL_UP)
 
 if button_b.is_pressed():
     prg()

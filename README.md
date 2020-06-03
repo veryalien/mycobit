@@ -25,17 +25,6 @@ That is a free excerpt from a complete instruction manual which you can still pu
 
 Mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements to support the larger microbit display and available memory. The input and output pins have been assigned according to the microbit edge connector analogue and digital pins.
 
-# Limitations
-
-The '4 bit' implementation was strictly observed, the microbit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is also not available.
-
-No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C will probably not be supported.
-
-Unfortunately micropython on the microbit's nrf51822 doesn't leave much memory free and it was a struggle to get the final mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
-There are a couple of enhanced shift and rotate instructions commented out in the code as they simply make the python too large or complex for it to be successfully compiled to byte-code when loaded.
-
-I've also made an (unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which includes these new instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython.
-
 # Getting Started
 
 A quick start-up guide to getting mycobit running on your microbit.
@@ -153,7 +142,7 @@ You're now in the editor which shows your stored program.
 
 Enjoy!
 
-# Example Program - binary counter
+# Example Program - simple binary counter
 
 Here's a very simple little example program just to give you a taste of programming mycobit with a bit more action.
 It will show a little binary counter on the top row of the display.
@@ -238,5 +227,20 @@ If you ever need to get back to a known state just follow these instructions aga
 
 # Can mycobit use the edge connector pins on the microbit?
 
-It can and it does, both analogue and digital inputs and outputs are supported. 
+It can and it does, both analogue and digital inputs and outputs are supported. Check the info sheet for more details.
+
+# How do I make a bob for my bit?
+
+You can make a relatively useful, but simple breakout board to use with mycobit using breadboard and some simple easy to obtain hobby electronics components. Full instructions are coming soon!
+
+# Limitations
+
+The '4 bit' mycobit implementation was strictly observed, the microbit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is also not available.
+
+No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C will probably not be supported.
+
+Unfortunately micropython on the microbit's nrf51822 doesn't leave much memory free and it was a struggle to get the final mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
+There are a couple of enhanced shift and rotate instructions commented out in the code as they simply make the python too large or complex for it to be successfully compiled to byte-code when loaded. If you don't need all of the other commands for your programs, you can swtich them 'off' by carefully commenting them out and then re-loading the modified mycobit.py using the mu editor. 
+
+I've also made an (at the moment, unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which includes the shift and rotate instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython. The bpi:bit also has an RGB 5x5 LED display which is very nice indeed!
 

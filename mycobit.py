@@ -105,6 +105,7 @@ def run():
 
     wait=[1,2,5]
     Dout=[pin12, pin8, pin2, pin1]
+    button=[button_a, button_b]
 
     pin16.set_pull(pin16.PULL_UP)
     pin15.set_pull(pin15.PULL_UP)
@@ -183,8 +184,7 @@ def run():
             elif DATA==0x04:
                 A=Din
             elif DATA>=0x05 and DATA<=8:
-                DATA=DATA-5
-                A=(Din&DATA)>>DATA
+                A=(Din>>(DATA-5))&0x01
             elif DATA==0x09:
                 A=int(pin1.read_analog()/64)
             elif DATA==0x0A:
@@ -243,6 +243,7 @@ def run():
                 continue
 
         elif INST==0x0C:
+            SKIP=A==0
             if DATA==0x01:
                 SKIP=A>B
             elif DATA==0x02:
@@ -253,14 +254,10 @@ def run():
                 SKIP=(Din&(2**(DATA%4))==2**(DATA%4))
             elif DATA>=0x08 and DATA<=0x0B:
                 SKIP=(Din&(2**(DATA%4))==0x00)
-            elif DATA==0x0C:
-                SKIP=button_a.is_pressed()
-            elif DATA==0x0D:
-                SKIP=button_b.is_pressed()
-            elif DATA==0x0E:
-                SKIP=not button_a.is_pressed()
-            elif DATA==0x0F:
-                SKIP=not button_b.is_pressed()
+            elif DATA==0x0C or DATA==0x0D:
+                SKIP=button[DATA-0x0C].is_pressed()
+            elif DATA>=0x0E:
+                SKIP=not button[DATA-0x0E].is_pressed()
             if SKIP:
                 PC=PC+1
 

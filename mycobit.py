@@ -212,7 +212,7 @@ def run():
             elif DATA==0x09:
                 A=A^B
             elif DATA==0x0A:
-                A=not A
+                A=A^0x0F
 #            elif DATA==0x0B:
 #                A=A<<1
 #            elif DATA==0X0C:

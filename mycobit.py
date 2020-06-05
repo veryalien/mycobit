@@ -21,13 +21,14 @@ def load(fn):
 def get_nib(pb,nib):
     if nib:
         return p[pb]&0x0F
-    else: return (p[pb]>>4)&0x0F
+    else:
+        return (p[pb]>>4)&0x0F
 
 def set_nib(pb,nib,v):
     if nib:
         p[pb]=(p[pb]&0xF0)|v
     else:
-        p[pb]=(p[pb]&0x0F)|(v<<4)
+        p[pb]=(v<<4)|(p[pb]&0x0F)
 
 def prg():
     PC=0
@@ -57,14 +58,14 @@ def prg():
             break
 
         if button_a.is_pressed():
-            if moved:
-                moved=0
-                set_nib(PC,nib%2,0x0F)
+            #if moved:
+            #    moved=0
+            #    set_nib(PC,nib%2,0x0F)
             set_nib(PC,nib%2,(get_nib(PC,nib%2)+1)%16)
             sleep(100)
 
         if button_b.is_pressed():
-            moved=1
+            #moved=1
             nib=nib+1
             PC=nib>>1
             if PC==256:
@@ -94,13 +95,13 @@ def run():
     B=0
     C=0
     D=0
-    Din=bytearray(1)
+    Din=0
     PC=0
     PAGE=0
     RET=0
-    SKIP=bytearray(1)
-    INST=bytearray(1)
-    DATA=bytearray(1)
+    SKIP=0
+    INST=0
+    DATA=0
     Row=0
 
     wait=[1,2,5]
@@ -131,7 +132,7 @@ def run():
                 A=get_nib(C*16+B,1-(INST&0x01))
 
         elif INST==0x01:
-            for i in range(0,4):
+            for i in range(4):
                 display.set_pixel(4-i,Row,9*bool(DATA&(1<<i)))
 
         elif INST==0x02:
@@ -160,14 +161,14 @@ def run():
             elif DATA==0x03:
                 D=A
             elif DATA==0x04:
-                for i in range(0,4):
+                for i in range(4):
                     display.set_pixel(4-i,Row,9*bool(A&(1<<i)))
             elif DATA>=0x05 and DATA<=0x08:
                 display.set_pixel(9-DATA,Row,9*(A&0x01))
             elif DATA==0x09:
                 pin0.write_analog((A*64)%1023)
             elif DATA==0x0A:
-                for i in range(0,4):
+                for i in range(4):
                     Dout[i].write_digital((A>>i)&0x01)
             elif DATA>=0x0B and DATA<=0x0E:
                 Dout[DATA-0X0B].write_digital(A&0x01)
@@ -213,15 +214,14 @@ def run():
                 A=A^B
             elif DATA==0x0A:
                 A=A^0x0F
-#            elif DATA==0x0B:
-#                A=A<<1
-#            elif DATA==0X0C:
-#                A=A>>1
-#            elif DATA==0x0D:
-#                A=(A<<1)|((A&0x08)>>3)
-#            elif DATA==0X0E:
-#                A=(A>>1)|((A&0x01)<<3)
-            A=A%16
+            elif DATA==0x0B:
+                A=A<<1
+            elif DATA==0X0C:
+                A=A>>1
+            elif DATA==0x0D:
+                A=(A<<1)|((A&0x08)>>3)
+            elif DATA==0X0E:
+                A=(A>>1)|((A&0x01)<<3)
 
         elif INST==0x08:
             PAGE=DATA*16
@@ -250,11 +250,9 @@ def run():
                 SKIP=A<B
             elif DATA==0x03:
                 SKIP=A==B
-            elif DATA>=0x04 and DATA<=0x07:
-                SKIP=(Din&(2**(DATA%4))==2**(DATA%4))
-            elif DATA>=0x08 and DATA<=0x0B:
-                SKIP=(Din&(2**(DATA%4))==0x00)
-            elif DATA==0x0C or DATA==0x0D:
+            elif DATA>=0x04 and DATA<=0x0B:
+                SKIP=(Din>>DATA%4)&0x01==1*(DATA<0x08)
+            elif DATA>=0x0C and DATA<=0x0D:
                 SKIP=button[DATA-0x0C].is_pressed()
             elif DATA>=0x0E:
                 SKIP=not button[DATA-0x0E].is_pressed()
@@ -271,6 +269,7 @@ def run():
             continue
 
         PC=(PC+1)%256
+        A=A%16
 
 if button_b.is_pressed():
     prg()

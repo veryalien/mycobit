@@ -1,6 +1,8 @@
 # mycobit program files
 
-These pre-entered program files allow you to use different mycobit programs without using the (annoying?) editor and the micro:bit buttons.
+These pre-defined program files allow you to use different mycobit programs without using the (annoying?) editor and the micro:bit buttons.
+
+Pre-defined mycobit program files are binary data files without any 'dot' file type. They are not python or hex files, please do not use any dot file type in the file name. 
 
 Download and copy a pre-defined mycobit program file to your mu-code folder and rename the file to exactly the name: mycobit
 

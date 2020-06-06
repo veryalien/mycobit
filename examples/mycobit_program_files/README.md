@@ -22,3 +22,9 @@ Reset the micro:bit and the pre-defined mycobit program will run.
 
 You can reset the micro:bit with button B held down to start the editor if you want to look at the mycobit program commands.
 
+# List of pre-defined program files
+
+### mycobit_show_font
+
+Displays all 64 pre-defined characters stored in Pages 0x08 to 0x0F of the 'default' program file.
+The original TPS system only used 8 memory pages and the default programs could omly use those 8 pages. mycobit provides 16 memory pages which is enough space to define 64 4x4 characters which could be used on the mycobit display.

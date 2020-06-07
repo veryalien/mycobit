@@ -7,31 +7,13 @@ Mycobit is a micro:bit implementation of the MyCo (My little Computer) system, a
 You can create, save and run useful programs directly on the micro:bit, without needing a computer connected at all.
 Once mycobit has been installed on the micro:bit you can program using only the three buttons A, B and reset!
 
-For a complete guide to MyCo/TPS you can have a look at the german site: http://www.elektronik-labor.de/Lernpakete/TPS/TPS0.html
-
-At that site you'll see that TPS has a long history, going back over a number of years.
-
-I bought this [Microcontroller Pack](https://www.conrad.com/p/conrad-components-10104-profi-mikrocontroller-course-material-14-years-and-over-192286 "Conrad TPS Pack") from Conrad and I was hooked.
-
-I apolgise profusely for the state of the 'denglisch' on the Conrad page, it might be actually be 'double Dutch', but never mind!
-
-I've lived in Germany for over 20 years, so it's not that much of a problem for me to understand the original documentation.
-
-For a lot of useful information in english I suggest that you download this pdf: http://www.elektronik-labor.de/Literatur/MyCo2014.pdf
-
-That is a free excerpt from a complete instruction manual which you can still purchase from amazon.
-Please note though that, unfortunately, the instruction table is very strangely formatted and doesn't contain all of the proper instruction descriptions. See the mycobit_info.pdf file for more details.
-
-Mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins.
-
 # Getting Started
 
 A quick start-up guide to getting mycobit running on your micro:bit.
 
 # Installation
 
-The initial version of mycobit is written in micropython, not makecode.
-So you'll need an editor for vanilla micro:bit micropython.
+mycobit is written in micropython, not makecode. So you'll need an editor for vanilla micro:bit micropython.
 
 I recommend using the python mu editor as it will handle installing micropython automatically.
 
@@ -40,8 +22,8 @@ Load up the mycobit.py file in mu and download it to your micro:bit.
 Reset your micro:bit, and let's get started with mycobit programming!
 
 # First steps in the editor
-There's nothing on the display, is it dead?
-No, it's not dead, it's just doing nothing. We need to add a mycobit program.
+
+There's nothing on the display, is it dead? No, it's not dead, it's just doing nothing. We need to add a mycobit program.
 
 Keep button B held down and press and release the reset button.
 When the micro:bit restarts four of the top leds will light up. You're in the mycobit editor!
@@ -182,13 +164,13 @@ These demos contain the following programs:
 
 1 - Binary counter. This shows a counter on the top row of the display from 0 to F (15, binary 1111). The analogue output PWM is also changed on micro:bit pin 0, but this is not shown on the display.
 
-2 - Analogue input. This reads the value of AD1 (Analogue to digital 1 - micro:bit pin 1) and displays the corresponding digital value on the top row of the display. Without any input on micro:bit pin 1, his will probably show 3 on the display ``.  .  .  O  O``
+2 - Analogue input. This reads the value of AD1 (Analogue to digital 1 - micro:bit pin 1) and displays the corresponding digital value on the top row of the display. Without any input on micro:bit pin 1, this will probably show 3 on the display ``.  .  .  O  O``
 
 4 - 'Random' number generator. When started this will first show B (11, binary 1011) on the display. This isn't really a random number generator, while button A is held down, the top row very quickly cycles through 0 to F. So you cannot really see the value. When you release button A, the display will stop at whatever 'random' number it was at in the sequence. By the way, 0 is a valid number, so if you manage to stop at 0, no leds will be lit. You didn't break it, just hold button A again!
 
 8 - Stopwatch. When started the display will be empty. When button A is held down a fast counter (but not as fast as the random number) will begin from 0 and keep cycling. When button A is released the display shows the current value. You can pick a number from 0 to 15 and keep trying to stop the stopwatch on that value!
 
-C - Stopwatch with two buttons. When When started the display will be empty. When button A is held down a fast counter (but not as fast as the random number) will begin from 0 and keep cycling. When you release button A the stopwatch does not stop! Press button B and the stopwatch will stop and show the current value. You must press button B again to reset the stopwatch. The display will be empty. The stopwatch can be restarted by pressing button A again. If you manage to hit button B on 0, you'll still have to reset the stopwatch by pressing button B again, otherwise it will not restart button A. There's another little mycobit game for you, try to stop the stopwatch exactly on 0!
+C - Stopwatch with two buttons. When started the display will be empty. When button A is held down a fast counter (but not as fast as the random number) will begin from 0 and keep cycling. When you release button A the stopwatch does not stop! Press button B and the stopwatch will stop and show the current value. You must press button B again to reset the stopwatch. The display will now be empty and the stopwatch can be restarted by pressing button A again. If you manage to hit button B on 0, you'll still have to reset the stopwatch by pressing button B again, otherwise it will not restart when you press button A. There's another little mycobit game for you, try to stop the stopwatch exactly on 0!
 
 The demo program numbers 1, 2, 4, 8 and C are the digital input pin values that need to be read at reset to start the relevant demo program. 
 
@@ -217,7 +199,7 @@ Now press and hold button B, while holding press button A. This will save 0xFF 0
 
 mycobit will now load the default programs from the file 'default' into the 'mycobit' file. You've 'lost' your program, but now you've got the demo programs loaded - more details on using the demos coming soon!
 
-If you see the top row left and right pixels blinking then it's working! Alas, without any breakout board, it won't help much to begin with.
+If you see the top row left and right pixels blinking then it's working!
 
 If you go into the editor (reset with button B pressed) you'll now see the first four nibbles of the demo program instead of 0xF 0xF 0xF 0xF.
 
@@ -245,6 +227,25 @@ It can and it does, both analogue and digital inputs and outputs are supported. 
 # How do I make a bob for my bit?
 
 You can make a relatively simple, but useful breakout board to use with mycobit using a breadboard and some basic, easy to obtain hobby electronics components. Full instructions are coming soon!
+
+# mycobit History
+
+For a complete guide to MyCo/TPS you can have a look at the german site: http://www.elektronik-labor.de/Lernpakete/TPS/TPS0.html
+
+At that site you'll see that TPS has a long history, going back over a number of years.
+
+I bought this [Microcontroller Pack](https://www.conrad.com/p/conrad-components-10104-profi-mikrocontroller-course-material-14-years-and-over-192286 "Conrad TPS Pack") from Conrad and I was hooked.
+
+I apolgise profusely for the state of the 'denglisch' on the Conrad page, it might be actually be 'double Dutch', but never mind!
+
+I've lived in Germany for over 20 years, so it's not that much of a problem for me to understand the original documentation.
+
+For a lot of useful information in english I suggest that you download this pdf: http://www.elektronik-labor.de/Literatur/MyCo2014.pdf
+
+That is a free excerpt from a complete instruction manual which you can still purchase from amazon.
+Please note though that, unfortunately, the instruction table is very strangely formatted and doesn't contain all of the proper instruction descriptions. See the mycobit_info.pdf file for more details.
+
+Mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins.
 
 # Limitations
 

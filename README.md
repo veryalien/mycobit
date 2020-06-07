@@ -29,7 +29,7 @@ Keep button B held down and press and release the reset button.
 When the micro:bit restarts four of the top leds will light up. You're in the mycobit editor!
 The highlighted leds are the editor 'cursor', showing you which nibble is to be edited. Release button B and the leds will turn off.
 
-mycobit is a 4-bit system, everything exist within groups of 4 binary digits from 0000 to 1111 or, in base 16 (hexadecimal), 0x0 to 0xF.
+mycobit is a 4-bit system, everything exists within groups of 4 binary digits from 0000 to 1111 or, in base 16 (hexadecimal), 0x0 to 0xF.
 8-bit systems are based on groups of 8 binary digits, commonly called bytes. 4 bit groups are smaller than bytes and are often referred to as nibbles or nybbles.
 
 Press and release button A, one led will be displayed in the top right-hand corner of the display. The value 1 is now in the first nibble.

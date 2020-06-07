@@ -23,7 +23,7 @@ Reset your micro:bit, and let's get started with mycobit programming!
 
 # First steps in the editor
 
-There's nothing on the display, is it dead? No, it's not dead, it's just doing nothing. We need to add a mycobit program.
+There's nothing on the display, is it dead? No, it's not dead, it's just doing nothing. You need to add a mycobit program.
 
 Keep button B held down and press and release the reset button.
 When the micro:bit restarts four of the top leds will light up. You're in the mycobit editor!
@@ -37,12 +37,12 @@ Hold button A down and it will cycle through all 16 values. Some action!
 
 Pressing button B will move to the next nibble, it will be highlighted with the cursor.
 Hold down button B and it will move through the mycobit memory.
-Note: You cannot move backwards in memory, we've only got buttons A, B and reset!
+Note: You cannot move backwards in memory, you've only got buttons A, B and reset!
 If you go too far in the memory you'll need to save your current program and then reset to get back to the start of memory. Don't worry it's not difficult, see below. You'll get used to it.
 
 As the cursor moves through the memory you'll see some leds light up on the left and bottom of the display. These indicate the byte address in mycobit memory.
-The left column indicates the byte we are editing. The display shows two bytes, split into four nibbles. So two of the nibbles have the same byte address.
-The bottom row indicates which page we are editing. mycobit memory is split into 16 bytes in 16 pages. Address space of 256 bytes, Think of all the possibilities!
+The left column indicates the byte you are editing. The display shows two bytes, split into four nibbles. So two of the nibbles have the same byte address.
+The bottom row indicates which page you are editing. mycobit memory is split into 16 bytes in 16 pages. Address space of 256 bytes, think of all the possibilities!
 
 The overall editor display looks like this:
 
@@ -52,7 +52,7 @@ The overall editor display looks like this:
 ``e . . . .`` <br/>
 ``. e g a p`` <br/>
 
-'egap' is page backwards as we count the bytes from right to left to match the way nibble values are displayed!
+'egap' is page backwards, simply because the pages are counted on the display from right to left to match the way nibble values are displayed!
 
 The left column will count from 0 to 15 (top to bottom), depending on the byte being edited.
 The bottom row will count from 0 to 15 (right to left - to match the nibble values), depending on the page.
@@ -65,19 +65,22 @@ Reset the micro:bit with button B held down to get back into the editor at byte 
 Instructions go in the first nibble of each byte.
 
 Press button A once so that the value 1 is shown on the top row of leds: ``. . . . O``
+
 The instruction 1 shows a value on the display at runtime.
 
 Press button B (don't hold) to highlight the second nibble.
 
 Data values go in the second nibble of each byte.
+
 For instruction 1, the data will be the value shown on the mycobit display.
 
 Press button A until the value 10 (0x0A) is displayed: ``. O . O .``
+
 Hold down button A to step through all the values, if you go too far, just cycle around again until you get back to be value that you need.
  
 The second instruction will be a relative jump to itself to 'stop' the program.
 
-Press button B to highlight the third row of leds, the top left led lights up, we are editing byte 1.
+Press button B to highlight the third row of leds, the top left led lights up, you are editing byte 1.
 
 Repeatedly press button A until the value 3 is displayed: ``. . . O O``
 
@@ -97,11 +100,13 @@ Note that the memory counters are shown dimmer than the contents of memory.
 
 # Saving and running that first program
 
-We've got a program in the editor, but now we need to run it.
+You've got a program in the editor, but now you need to run it.
 First, you need to save that program to the micro:bit flash.
-Hold down button B. The editor will start scrolling through memory. This is ok, we are only viewing not editing.
+Hold down button B. The editor will start scrolling through memory. This is ok, you are only viewing and moving the cursor, not editing.
 While keeping button B held down, also hold down button A until the display clears.
+
 The program has now been saved in the micro:bit.
+
 Release both buttons.
 
 If everything worked correctly the stored program will run and you'll see the value 10 (0x0A) displayed on the lop row of leds: ``. O . O .``
@@ -124,7 +129,7 @@ Enjoy!
 # Example Program - simple binary counter
 
 Here's a very simple little example program just to give you a taste of programming mycobit with a bit more action.
-It will show a binary counter on the top row of the display.
+It will show a binary counter on the top row of the display. Don't worry about understanding the commands, just get used to pressing the correct buttons at the right time to control the editor.
 
 Enter the following sequence of binary nibble values in the editor:
 
@@ -151,11 +156,11 @@ Good question, more info coming soon!
 
 See mycobit_info.pdf for the complete, but mostly unexplained, instruction set.
 
-# 'Default' MyCo/TPS programs
+# Default MyCo/TPS programs
 
-Note: To make full use of the demo programs you will need some kind of breakout board (bob) for your bit, so you can access all of the relevant pins on the edge connector. Without any breakout board you'll just see some blinking leds as that is the default MyCo/TPS demo without any input pins set to the correct state. The default program can be easily modified to allow most of the demo programs to work without any connected hardware, follow these instructions for [default programs without a bob](https://github.com/veryalien/mycobit/blob/master/doc/Default_no_bob.md "Default no bob").
+Note: To make full use of the default demo programs you will need some kind of breakout board (bob) for your bit, so you can access all of the relevant pins on the edge connector. Without any breakout board you'll just see some blinking leds as that is the default MyCo/TPS demo without any input pins set to the correct state. The default program can be easily modified to allow most of the demo programs to work without any connected hardware, follow these instructions for [default programs without a bob](https://github.com/veryalien/mycobit/blob/master/doc/Default_no_bob.md "Default no bob").
 
-The original MyCo/TPS system came with a set of built-in demo programs and subroutines.
+The original MyCo/TPS system came with a default set of built-in demo programs and subroutines.
 You can find exactly the same mycobit programs here in the file called 'default'.
 
 These demos contain the following programs:
@@ -251,8 +256,8 @@ The '4 bit' mycobit implementation was strictly observed, the micro:bit display 
 
 No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C will probably not be supported.
 
-Unfortunately micropython on the micro:bit's nrf51822 doesn't leave much memory free and it was a struggle to get the final mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
-There are a couple of enhanced shift and rotate instructions in the latest version of the code. But, unfortunately, any further addtions seem to make the python too large or complex for it to be successfully compiled to byte-code when loaded. If you want to play with the mycobit python source code for your own programs, you can swtich things 'on' and 'off' by carefully commenting them out in the mu-editor and then re-loading the modified mycobit.py onto the micro:bit. 
+Unfortunately micropython on the micro:bit's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
+There are a couple of enhanced shift and rotate instructions in the latest version of the code. But, unfortunately, any further addtions, or even subtle changes to the python code, seem to make the python too large or complex for it to be successfully compiled to byte-code when loaded. If you want to play with the mycobit python source code for your own programs, you can switch things 'on' and 'off' by carefully commenting them out in the mu-editor and then re-loading the modified mycobit.py onto the micro:bit. 
 
-I've also made an (at the moment, unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which includes the shift and rotate instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython. The bpi:bit also has an RGB 5x5 LED display which is very nice indeed!
+I've also made an (at the moment, unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which also includes the shift and rotate instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython. The bpi:bit also has an RGB 5x5 LED display which is very nice indeed and mycobpibit includes additional display colour commands!
 

@@ -53,7 +53,7 @@ mycobit is a 4-bit system, everything exits within groups of 4 binary digits fro
 8-bit systems are based on groups of 8 binary digits, commonly called bytes. 4 bit groups are smaller than bytes and are often referred to as nibbles or nybbles.
 
 Press and release button A, one led will be displayed in the top right-hand corner of the display. The value 1 is now in the first nibble.
-Hold button A down and it will cycle through all 16 values. Wow, action!
+Hold button A down and it will cycle through all 16 values. Some action!
 
 Pressing button B will move to the next nibble, it will be highlighted with the cursor.
 Hold down button B and it will move through the mycobit memory.
@@ -62,7 +62,7 @@ If you go too far in the memory you'll need to save your current program and the
 
 As the cursor moves through the memory you'll see some leds light up on the left and bottom of the display. These indicate the byte address in mycobit memory.
 The left column indicates the byte we are editing. The display shows two bytes, split into four nibbles. So two of the nibbles have the same byte address.
-The bottom row indicates which page we are editing. mycobit memory is split into 16 bytes in 16 pages. Address space of 256 bytes, wow!
+The bottom row indicates which page we are editing. mycobit memory is split into 16 bytes in 16 pages. Address space of 256 bytes, Think of all the possibilities!
 
 The overall editor display looks like this:
 
@@ -173,10 +173,24 @@ See mycobit_info.pdf for the complete, but mostly unexplained, instruction set.
 
 # 'Default' MyCo/TPS programs
 
-Note: To make full use of the demo programs you will need some kind of breakout board (bob) for your bit, so you can access all of the relevant pins on the edge connector. Without any breakout board you'll just see some blinking leds as that is the default MyCo/TPS demo without any input pins set to the correct state.
+Note: To make full use of the demo programs you will need some kind of breakout board (bob) for your bit, so you can access all of the relevant pins on the edge connector. Without any breakout board you'll just see some blinking leds as that is the default MyCo/TPS demo without any input pins set to the correct state. The default program can be easily modified to allow most of the demo programs to work without any connected hardware, follow these instructions for [default programs without a bob](https://github.com/veryalien/mycobit/blob/master/doc/Default_no_bob.md "Default no bob").
 
 The original MyCo/TPS system came with a set of built-in demo programs and subroutines.
 You can find exactly the same mycobit programs here in the file called 'default'.
+
+These demos contain the following programs:
+
+1 - Binary counter. This shows a counter on the top row of the display from 0 to F (15, binary 1111). The analogue output PWM is also changed on micro:bit pin 0, but this is not shown on the display.
+
+2 - Analogue input. This reads the value of AD1 (Analogue to digital 1 - micro:bit pin 1) and displays the corresponding digital value on the top row of the display. Without any input on micro:bit pin 1, his will probably show 3 on the display ``.  .  .  O  O``
+
+4 - 'Random' number generator. When started this will first show B (11, binary 1011) on the display. This isn't really a random number generator, while button A is held down, the top row very quickly cycles through 0 to F. So you cannot really see the value. When you release button A, the display will stop at whatever 'random' number it was at in the sequence. By the way, 0 is a valid number, so if you manage to stop at 0, no leds will be lit. You didn't break it, just hold button A again!
+
+8 - Stopwatch. When started the display will be empty. When button A is held down a fast counter (but not as fast as the random number) will begin from 0 and keep cycling. When button A is released the display shows the current value. You can pick a number from 0 to 15 and keep trying to stop the stopwatch on that value!
+
+C - Stopwatch with two buttons. When When started the display will be empty. When button A is held down a fast counter (but not as fast as the random number) will begin from 0 and keep cycling. When you release button A the stopwatch does not stop! Press button B and the stopwatch will stop and show the current value. You must press button B again to reset the stopwatch. The display will be empty. The stopwatch can be restarted by pressing button A again. If you manage to hit button B on 0, you'll still have to reset the stopwatch by pressing button B again, otherwise it will not restart button A. There's another little mycobit game for you, try to stop the stopwatch exactly on 0!
+
+The demo program numbers 1, 2, 4, 8 and C are the digital input pin values that need to be read at reset to start the relevant demo program. 
 
 MyCo/TPS has a nifty way to get back to a known default state by re-loading the original demo programs from a hidden part of memory.
 This behaviour is also implemented in mycobit, but first you'll need to copy the 'default' file to the micro:bit.

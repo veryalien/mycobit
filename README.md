@@ -152,9 +152,9 @@ You can edit the program and change the wait time between counts from 0 = 1 ms t
 
 # What do all those mycobit instructions do?
 
-Good question, more info coming soon!
+The complete mycobit instruction set is described in [Instruction set.](https://github.com/veryalien/mycobit/blob/master/doc/Instruction_set.md "Instruction Set")
 
-See mycobit_info.pdf for the complete, but mostly unexplained, instruction set.
+A table of all the instructions and all of the micro:bit pin mappings can be found in [mycobit info.](https://github.com/veryalien/mycobit/blob/master/doc/mycobit_info.pdf "mycobit_info")
 
 # Default MyCo/TPS programs
 

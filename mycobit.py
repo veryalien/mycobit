@@ -33,7 +33,7 @@ def set_nib(pb,nib,v):
 def prg():
     PC=0
     nib=0
-    moved=1
+    #moved=1
     load(MYCO)
     for i in range(2):
         for j in range(2):

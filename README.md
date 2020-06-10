@@ -181,12 +181,11 @@ MyCo/TPS has a nifty way to get back to a known default state by re-loading the 
 This behaviour is also implemented in mycobit, but first you'll need to copy the 'default' file to the micro:bit.
 The easiest way is to get the 'default' file from the mycobit github repository and copy it to your mu-code directory.
 
-Use the mu files tab to show the files on your micro:bit. On the left you'll see the list of files on your micro:bit, most probably just main.py (mycobit.py is automatically renamed to main.py as it's copied) and any programs you've saved in the file 'mycobit'.
- Programs are saved and loaded to and from the micro:bit micropython file system via a file called 'mycobit'.
+Use the mu files tab to show the files on your micro:bit. On the left you'll see the list of files on your micro:bit, with mycobit installed probably just mycobit programs you might have saved. Programs are saved and loaded to and from the micro:bit micropython file system via a file called 'mycobit'.
 
 On the right side, mu will show the list of files on your computer, if you've copied 'default' to your mu-code directory it will appear here.
 
-Drag the 'default' file onto the micro:bit file list. It will be copied over to the micro:bit. You only have to do this once, or after you've been using your micro:bit for other things and the micropython file system got re-flashed.
+Drag the 'default' file onto the micro:bit file list. It will be copied over to the micro:bit. You only have to do this once, or after you've been using your micro:bit for other things, or perhaps modifying the mycobit python program, and the micropython file system got re-flashed.
 
 Now you can use the editor to load the default mycobit programs whenever you want, this will however completely overwrite any stored programs in the file 'mycobit'.
 
@@ -229,7 +228,35 @@ It can and it does, both analogue and digital inputs and outputs are supported. 
 
 # How do I make a bob for my bit?
 
-You can make a relatively simple, but useful breakout board to use with mycobit using a breadboard and some basic, easy to obtain hobby electronics components. Full instructions are coming soon!
+You can make a relatively simple, but useful breakout board to use with mycobit using a breadboard and some basic, easy to obtain hobby electronics components.
+
+To use all of the mycobit input and output commands and pins, you will need access to the following edge connector pins:
+
+Pin  0 - PWM - analogue output using Pulse Width Modulation.
+
+Pin  1 - AD1 - analogue input 1 or Dout pin 3 digital output
+
+Pin  2 - AD2 - analogue input 2 or Dout pin 2 digital output
+
+Note: Pins 1 and 2 cannot be used for both input and output in the same program
+
+Pin  8 - Dout pin 1 digital output
+
+Pin 12 - Dout pin 0 digital output - originally intended for micro:bit 'accessibility' features and some breakouts don't break out pin 12
+
+Pin 13 - Din pin 3 - digital input
+
+Pin 14 - Din pin 2 - digital input
+
+Pin 15 - Din pin 1 - digital input
+
+Pin 16 - Din pin 0 - digital input
+
+
+Any breakout board that you use must give access to the relevant pin, otherwise using the corresponding mycobit commands will have no effect.
+
+A few connections will be needed to inputs (switches, potentiometers, analogue sensors, etc.) and outputs (buzzers, LEDs, etc,) - coming soon!
+
 
 # mycobit History
 

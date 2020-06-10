@@ -40,11 +40,11 @@ For example the commands 41 54 would be shown in the editor as:
 |  6    |  1       | A=B                  | Set register A to register B value |
 |  6    |  2       | A=C                  | Set register A to register C value |
 |  6    |  3       | A=D                  | Set register A to register D value |
-|  6    |  4       | A=Dout               | Set register A to the digital outputs (micro:bit pins 1, 2, 8 and 12) values |
-|  6    |  5       | A=Dout.0             | Set register A to Dout.0 (micro:bit pin 12) value | 
-|  6    |  6       | A=Dout.1             | Set register A to Dout.1 (micro:bit pin 8) value | 
-|  6    |  7       | A=Dout.2             | Set register A to Dout.2 (micro:bit pin 2) value | 
-|  6    |  8       | A=Dout.3             | Set register A to Dout.3 (micro:bit pin 1) value |
+|  6    |  4       | A=Din                | Set register A to the digital input (micro:bit pins 13, 14, 15 and 16) values |
+|  6    |  5       | A=Din.0             | Set register A to Din.0 (micro:bit pin 16) value | 
+|  6    |  6       | A=Din.1             | Set register A to Din.1 (micro:bit pin 15) value | 
+|  6    |  7       | A=Din.2             | Set register A to Din.2 (micro:bit pin 14) value | 
+|  6    |  8       | A=Din.3             | Set register A to Din.3 (micro:bit pin 13) value |
 |  6    |  9       | A=AD1                | Set register A to AD1 (Analogue to Digital 1 - micro:bit pin 1) value |
 |  6    |  A       | A=AD2                | Set register A to AD2 (Analogue to Digital 2 - micro:bit pin 2) value |
 |  6    |  F       | Save memory          | Save the entire contents of memory to the 'mycobit' file |

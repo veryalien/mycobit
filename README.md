@@ -277,6 +277,29 @@ Please note though that, unfortunately, the instruction table is very strangely 
 
 Mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins.
 
+# mycobit Versions
+
+Here is a list of all the mycobit versions. All are more or less up and running, not all of them are currently released. Watch this space.
+
+In a strange quirk of fate, mycobit has been implemented for 4 bits!!
+
+### mycobit
+
+mycobit is for the micro:bit. This version of mycobit!
+
+### mycobpibit
+
+mycobpibit is for the banana pi bpi:bit The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython. The bpi:bit also has an RGB 5x5 LED display which is very nice indeed. mycobpibit includes additional display colour commands!
+
+### myconanobit
+
+myconanobit is for the kittenbot nanobit, a micro:bit with a Arduino nano pin layout, and no built-in LED matrix display (but with the row pins, so you could make your own display on a bob). The nanobit is unfortunately a bit difficult to order from outside asia. Documentation and support are very tricky. A couple of strange limitations based on memory usage versus mycobit. But it all works!
+
+### mycomeowbit
+
+mycomeowbit (maybe I'll change the name before release?!) is for the kittenbot meowbit, a makecode arcade board, with a large colour screen and arcade type controls. It has a micro:bit compatible edge connector. Adafruit circuitpython is used on the STM32 instead of micropython.
+The meowbit has a really interesting wireless SD card add-on which is effectively a micro:bit in an SD card format for meowbit to micro:bit compatible radio and bluetooth communication. This add-on card is difficult to order outside asia. Wireless is not used by mycobit, but nice anyway.
+
 # Limitations
 
 The '4 bit' mycobit implementation was strictly observed, the micro:bit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is not available.
@@ -286,5 +309,4 @@ No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I
 Unfortunately micropython on the micro:bit's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
 There are a couple of enhanced shift and rotate instructions in the latest version of the code. But, unfortunately, any further addtions, or even subtle changes to the python code, seem to make the python too large or complex for it to be successfully compiled to byte-code when loaded. If you want to play with the mycobit python source code for your own programs, you can switch things 'on' and 'off' by carefully commenting them out in the mu-editor and then re-loading the modified mycobit.py onto the micro:bit. 
 
-I've also made an (at the moment, unpublished) implementation for the banana pi bpi:bit, called mycobpibit, which also includes the shift and rotate instructions. The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython. The bpi:bit also has an RGB 5x5 LED display which is very nice indeed and mycobpibit includes additional display colour commands!
 

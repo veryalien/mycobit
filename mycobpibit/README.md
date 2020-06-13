@@ -10,4 +10,8 @@ All of the other features of mycobit for the micro:bit will work with mycobpibit
 
 This version will not work on the micro:bit.
 
+mycobpibit is written in micropython, you will need to have micropyhon installed on your bpi:bit to use mycobpibit. You can find the installation instructions here, get ready to use chrome and translate to english!
+
+https://doc.bpi-steam.com/zh_CN/latest/micropython/install&use.html#bpi-bit-micropython
+
 When installing or updating, just remember to use the mycobpibit.py file, instead of mycobit.py!

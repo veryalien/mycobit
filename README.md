@@ -275,7 +275,7 @@ For a lot of useful information in english I suggest that you download this pdf:
 That is a free excerpt from a complete instruction manual which you can still purchase from amazon.
 Please note though that, unfortunately, the instruction table is very strangely formatted and doesn't contain all of the proper instruction descriptions. See the mycobit_info.pdf file for more details.
 
-Mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins.
+mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins.
 
 # mycobit Versions
 
@@ -295,9 +295,10 @@ mycobpibit is for the banana pi bpi:bit The bpi:bit uses an esp32 and there is s
 
 myconanobit is for the kittenbot nanobit, a micro:bit with a Arduino nano pin layout, and no built-in LED matrix display (but with the row pins, so you could make your own display on a bob). The nanobit is unfortunately a bit difficult to order from outside asia. Documentation and support are very tricky. A couple of strange limitations based on memory usage versus mycobit. But it all works!
 
-### mycomeowbit
+### myowbit
 
-mycomeowbit (maybe I'll change the name before release?!) is for the kittenbot meowbit, a makecode arcade board, with a large colour screen and arcade type controls. It has a micro:bit compatible edge connector. Adafruit circuitpython is used on the STM32 instead of micropython.
+myowbit (maybe I'll change the name before release?!) is for the kittenbot meowbit, a makecode arcade board, with a large colour screen and arcade type controls. It has a micro:bit compatible edge connector. Adafruit circuitpython was going to be used on the STM32 instead of micropython. However, I'm currently sticking with the kittenbot meowbit micropython implementation. Circuitpython is just too different to micropython to easily convert all the code, and the file system has very over-cautious read/write protection which is, in my opinion, extremely annoying.
+  
 The meowbit has a really interesting wireless SD card add-on which is effectively a micro:bit in an SD card format for meowbit to micro:bit compatible radio and bluetooth communication. This add-on card is difficult to order outside asia. Wireless is not used by mycobit, but nice anyway.
 
 # Limitations
@@ -307,6 +308,9 @@ The '4 bit' mycobit implementation was strictly observed, the micro:bit display 
 No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C will probably not be supported.
 
 Unfortunately micropython on the micro:bit's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
+
+Since this was originally written I've discovered the major flaw in the mico:bit version. I was simply too greedy with adding more memory pages than the original TPS. 128 bytes extra storage seems to put it right on the edge of filling the available RAM at boot/compile time. You live and you learn!
+
 There are a couple of enhanced shift and rotate instructions in the latest version of the code. But, unfortunately, any further addtions, or even subtle changes to the python code, seem to make the python too large or complex for it to be successfully compiled to byte-code when loaded. If you want to play with the mycobit python source code for your own programs, you can switch things 'on' and 'off' by carefully commenting them out in the mu-editor and then re-loading the modified mycobit.py onto the micro:bit. 
 
 

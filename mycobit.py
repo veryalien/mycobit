@@ -166,7 +166,7 @@ def run():
                 for i in range(4):
                     Dout[i].write_digital((A>>i)&0x01)
             elif DATA>=0x0B and DATA<=0x0E:
-                Dout[DATA-0X0B].write_digital(A&0x01)
+                Dout[DATA-0x0B].write_digital(A&0x01)
 
         elif INST==0x06:
             if DATA==0x00:
@@ -211,7 +211,7 @@ def run():
                 A=A^0x0F
             elif DATA==0x0B:
                 A=A<<1
-            elif DATA==0X0C:
+            elif DATA==0x0C:
                 A=A>>1
             elif DATA==0x0D:
                 A=(A<<1)|((A&0x08)>>3)

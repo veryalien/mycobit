@@ -50,11 +50,9 @@ def prg():
     while True:
         if button_a.is_pressed() and button_b.is_pressed():
             save()
-            sleep(200)
             display.clear()
             while button_a.is_pressed() and button_b.is_pressed():
                 pass
-            sleep(200)
             break
 
         if button_a.is_pressed():
@@ -66,11 +64,8 @@ def prg():
 
         if button_b.is_pressed():
             #moved=1
-            nib=nib+1
+            nib=(nib+1)%256
             PC=nib>>1
-            if PC==128:
-                nib=0
-                PC=0
             if nib%4==0:
                 for i in range(2):
                     for j in range(2):
@@ -127,9 +122,9 @@ def run():
 
         if INST==0x00 or INST==0x0F:
             if DATA:
-                set_nib(C*16+B,1-(INST&0x01),A)
+                set_nib((C%8)*16+B,1-(INST&0x01),A)
             else:
-                A=get_nib(C*16+B,1-(INST&0x01))
+                A=get_nib((C%8)*16+B,1-(INST&0x01))
 
         elif INST==0x01:
             for i in range(4):
@@ -171,7 +166,7 @@ def run():
                 for i in range(4):
                     Dout[i].write_digital((A>>i)&0x01)
             elif DATA>=0x0B and DATA<=0x0E:
-                Dout[DATA-0X0B].write_digital(A&0x01)
+                Dout[DATA-0x0B].write_digital(A&0x01)
 
         elif INST==0x06:
             if DATA==0x00:
@@ -216,15 +211,15 @@ def run():
                 A=A^0x0F
             elif DATA==0x0B:
                 A=A<<1
-            elif DATA==0X0C:
+            elif DATA==0x0C:
                 A=A>>1
             elif DATA==0x0D:
                 A=(A<<1)|((A&0x08)>>3)
-            elif DATA==0X0E:
+            elif DATA==0x0E:
                 A=(A>>1)|((A&0x01)<<3)
 
         elif INST==0x08:
-            PAGE=DATA*16
+            PAGE=(DATA%8)*16
 
         elif INST==0x09:
             PC=PAGE+DATA

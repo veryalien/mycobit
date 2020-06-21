@@ -2,14 +2,14 @@
 
 This version of mycobit is for the Kittenbot nanobit, a micro:bit in an Arduino nano compatible pin package.
 
-This is currently just a proof of concept version as there are a few show-stoppers, but it's possible to use with huge workarounds...
+This is currently just a proof of concept version as there are a few show-stoppers for general use, but it's possible to use with a few very technical workarounds...
 
 #### No Display
 
 There is no built-in LED matrix on the nanobit. However, all the row and column pins are accessible, so you could build one yourself.
 The only issue there is that the micro:bit has a 5x5 LED matrix display but it's actually accessed as a 3x9 matrix with 2 LEDs missing on one row!
 There is at least one breakout board for the nanobit that adds a LED matrix, but this only seems to be available in Thailand.
-I'm in the process of laying out a breadboard version of an add-on LED matrix, I'll report back when it's all working.
+I'm in the process of planning out a breadboard version of an add-on LED matrix, I'll report back when it's all working.
 
 #### No (visible) built-in editor
 
@@ -25,8 +25,11 @@ The nanobit does have two built-in buttons, which are exactly the same as button
 #### hexedit to the rescue
 
 So without a nice display and easy-to-use buttons, how can you use myconanobit with your own edited programs? 
-There is a tiny linux hexadecimal file editor that I use to modify the 'default' and 'mycobit' program files directly. You can load up a 'mycobit' file and edit each nibble, quickly and easily, rather than using any buttons on the nanobit. Transfer the current 'mycobit' from the nanobit to your computer using mu or mpfs, edit the 'mycobit' in hexedit, save and then transfer the file back to the nanobit using mu or mpfs.
-It's not very pretty, but it works!
+There is a tiny linux hexadecimal file editor called hexedit that I use to modify the 'default' and 'mycobit' program files directly. You can load up a 'mycobit' file and edit each nibble, quickly and easily, rather than using any buttons on the nanobit. Transfer the current 'mycobit' from the nanobit to your computer using mu or mpfs, edit the 'mycobit' in hexedit, save and then transfer the file back to the nanobit using mu or mpfs. It's not very pretty, but it works!
+
+I don't use Windows, unless forced, so I don't know of a hexadecimal file editor that can be used. If you know of one, that you have used successfully to edit mycobit files, please let me know.
+
+Be careful with editing mycobit files in an editor, for myconanobit the resulting file should be exactly 128 bytes, representing 8 Pages of 16 bytes.
 
 #### Lack of memory space
 
@@ -34,7 +37,7 @@ For some strange reason I could not get the mycobit program to fit in the memory
 
 What I've done in this version is to reduce the memory space to 8 Pages, which is exactly the same as the original TPS board (128 bytes). You can run all of the TPS programs, but some fancy mycobit features will not work, like accessing characters in the extended memory space.
 
-In fact this version will be very easy to crash as there are currently no stringent memory bounds checks, so if you try to address any memory in Pages 8 - 15, it will crash with a nasty micropython out of bounds error or something similar. This should be extremely easy to fix, as long as the python code doesn't get too large to be successfully loaded and compiled at boot.
+Trying to access memory Pages 8 to F will access Pages 0 to 7 instead.
 
 #### Proof of concept up and running
 

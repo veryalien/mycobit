@@ -32,7 +32,9 @@ The highlighted leds are the editor 'cursor', showing you which nibble is to be 
 mycobit is a 4-bit system, everything exists within groups of 4 binary digits from 0000 to 1111 or, in base 16 (hexadecimal), 0x0 to 0xF.
 8-bit systems are based on groups of 8 binary digits, commonly called bytes. 4 bit groups are smaller than bytes and are often referred to as nibbles or nybbles.
 
-Press and release button A, one led will be displayed in the top right-hand corner of the display. The value 1 is now in the first nibble.
+NOTE: The latest version of mycobit uses the original MyCo/TPS editor mode. Every time you move to a new nibble with button B, the next press of button A will put a zero in the nibble. This isn't so obvious when you are working with empty memory which is already all zeroes. Some versions of mycobit, including the versions for different boards, just added one to the value already in the nibble. If the following instructions don't seem to work, you are probably using an older version. Just press button A until you get the value you want!
+
+Press and release button A until one led is displayed in the top right-hand corner of the display. The value 1 is now in the first nibble.
 Hold button A down and it will cycle through all 16 values. Some action!
 
 Pressing button B will move to the next nibble, it will be highlighted with the cursor.
@@ -64,7 +66,7 @@ Reset the micro:bit with button B held down to get back into the editor at byte 
 
 Instructions go in the first nibble of each byte.
 
-Press button A once so that the value 1 is shown on the top row of leds: ``. . . . O``
+Repeatedly press button A until the value 1 is shown on the top row of leds: ``. . . . O``
 
 The instruction 1 shows a value on the display at runtime.
 
@@ -275,37 +277,47 @@ For a lot of useful information in english I suggest that you download this pdf:
 That is a free excerpt from a complete instruction manual which you can still purchase from amazon.
 Please note though that, unfortunately, the instruction table is very strangely formatted and doesn't contain all of the proper instruction descriptions. See the mycobit_info.pdf file for more details.
 
-mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins.
+mycobit is fully backwards-compatible with the MyCo/TPS systems. There are a few enhancements that add new extended commands, support the larger micro:bit display and available memory. The input and output pins have been assigned according to the micro:bit edge connector analogue and digital pins. See the limitations section for all the annoying limiting features and issues.
 
 # mycobit Versions
 
 Here is a list of all the mycobit versions. All are more or less up and running, not all of them are currently released. Watch this space.
 
-In a strange quirk of fate, mycobit has been implemented for 4 bits!!
+The names keep changing. I might change from myco: my (little) computer, into mycro: my (little) microprocessor. I don't think I'm infringing any copyright by using ':'. So, in the future, you might see mycro:bit, mycro:bpi, mycro:nano, mycro:meow, etc.
 
-### mycobit
+In a strange quirk of fate, mycobit has so far been implemented for 4 bits!! (and perhaps a few more bits...)
+
+### myco:bit
 
 mycobit is for the micro:bit. This version of mycobit!
 
-### mycobpibit
+### myco:bpi
 
 mycobpibit is for the banana pi bpi:bit The bpi:bit uses an esp32 and there is simply more free runtime memory available for micropython. The bpi:bit also has an RGB 5x5 LED display which is very nice indeed. mycobpibit includes additional display colour commands!
 
-### myconanobit
+### myco:nano
 
 myconanobit is for the kittenbot nanobit, a micro:bit with a Arduino nano pin layout, and no built-in LED matrix display (but with the row pins, so you could make your own display on a bob). The nanobit is unfortunately a bit difficult to order from outside asia. Documentation and support are very tricky. A couple of strange limitations based on memory usage versus mycobit. But it all works!
 
-### myowbit
+### myco:meow
 
-myowbit (maybe I'll change the name before release?!) is for the kittenbot meowbit, a makecode arcade board, with a large colour screen and arcade type controls. It has a micro:bit compatible edge connector. Adafruit circuitpython was going to be used on the STM32 instead of micropython. However, I'm currently sticking with the kittenbot meowbit micropython implementation. Circuitpython is just too different to micropython to easily convert all the code, and the file system has very over-cautious read/write protection which is, in my opinion, extremely annoying.
+myco:meow (maybe I'll change all the names before release?!) is for the kittenbot meowbit, a makecode arcade board, with a large colour screen and arcade type controls. It has a micro:bit compatible edge connector. Adafruit circuitpython will probably be used on the STM32 instead of micropython. However, I'm currently sticking with the kittenbot meowbit micropython implementation. Circuitpython is just too different to micropython to easily convert all the code in one swoop, and the file system has different read/write protection, so that's a bit tricky.
   
 The meowbit has a really interesting wireless SD card add-on which is effectively a micro:bit in an SD card format for meowbit to micro:bit compatible radio and bluetooth communication. This add-on card is difficult to order outside asia. Wireless is not used by mycobit, but nice anyway.
+
+### myco:clue
+
+The 5th 'bit'! When I get my hands on an Adafruit Clue (currently in transit!), I'll see what I can do with a proper circuitpython version, which will probably feed back into the pre-release meowbit version too.
+
+### myco:stack, myco:stick, myco:atom
+
+Can you guess?
 
 # Limitations
 
 The '4 bit' mycobit implementation was strictly observed, the micro:bit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is not available.
 
-No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C will probably not be supported.
+No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C cannot be supported due to space limitations.
 
 Unfortunately micropython on the micro:bit's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
 

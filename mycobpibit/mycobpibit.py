@@ -56,7 +56,7 @@ def set_nib(pb,nib,v):
 def prg():
     PC=0
     nib=0
-    #moved=1
+    moved=1
     load(MYCO)
     for i in range(2):
         for j in range(2):
@@ -73,27 +73,22 @@ def prg():
     while True:
         if button_a.is_pressed() and button_b.is_pressed():
             save()
-            sleep(200)
             display.clear()
             while button_a.is_pressed() and button_b.is_pressed():
                 pass
-            sleep(200)
             break
 
         if button_a.is_pressed():
-            #if moved:
-            #    moved=0
-            #    set_nib(PC,nib%2,0x0F)
+            if moved:
+                moved=0
+                set_nib(PC,nib%2,0x0F)
             set_nib(PC,nib%2,(get_nib(PC,nib%2)+1)%16)
             sleep(100)
 
         if button_b.is_pressed():
-            #moved=1
-            nib=nib+1
+            moved=1
+            nib=(nib+1)%512
             PC=nib>>1
-            if PC==256:
-                nib=0
-                PC=0
             if nib%4==0:
                 for i in range(2):
                     for j in range(2):

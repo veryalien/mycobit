@@ -25,7 +25,7 @@ p16 = Pin(5, Pin.IN, Pin.PULL_UP)
 p15 = Pin(23, Pin.IN, Pin.PULL_UP)
 p14 = Pin(19, Pin.IN, Pin.PULL_UP)
 p13 = Pin(18, Pin.IN, Pin.PULL_UP)
-    
+
 display.clear()
 
 p=bytearray(256)
@@ -187,7 +187,7 @@ def run():
                 for i in range(4):
                     Dout[i].write_digital((A>>i)&0x01)
             elif DATA>=0x0B and DATA<=0x0E:
-                Dout[DATA-0X0B].write_digital(A&0x01)
+                Dout[DATA-0x0B].write_digital(A&0x01)
 
         elif INST==0x06:
             if DATA==0x00:
@@ -200,7 +200,7 @@ def run():
                 A=D
             elif DATA==0x04:
                 A=Din
-            elif DATA>=0x05 and DATA<=8:
+            elif DATA>=0x05 and DATA<=0x08:
                 A=(Din>>(DATA-5))&0x01
             elif DATA==0x09:
                 A=int(pin1.read_analog()/256)
@@ -221,7 +221,8 @@ def run():
             elif DATA==0x05:
                 A=A*B
             elif DATA==0x06:
-                A=A/B
+                if B:
+                    A=A//B
             elif DATA==0x07:
                 A=A&B
             elif DATA==0x08:
@@ -232,11 +233,11 @@ def run():
                 A=A^0x0F
             elif DATA==0x0B:
                 A=A<<1
-            elif DATA==0X0C:
+            elif DATA==0x0C:
                 A=A>>1
             elif DATA==0x0D:
                 A=(A<<1)|((A&0x08)>>3)
-            elif DATA==0X0E:
+            elif DATA==0x0E:
                 A=(A>>1)|((A&0x01)<<3)
 
         elif INST==0x08:

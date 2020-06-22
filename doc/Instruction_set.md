@@ -2,7 +2,7 @@
 
 Brief "cheat sheet" details for the complete mycobit instruction set.
 
-Command bytes have an instruction high nibble and a data low nibble. When entering commands in the editor the high nibble is shown first with the low nibble underneath.
+Command bytes have an instruction high nibble and a Data low nibble. When entering commands in the editor the high nibble is shown first with the low nibble underneath.
 
 For example the commands 41 54 would be shown in the editor as:
 
@@ -17,10 +17,10 @@ For example the commands 41 54 would be shown in the editor as:
 |  ---  |  ---     |  ---                 | ---    |
 |  0    |  0       | A = lnib             | Set register A to the low nibble value from the memory address: C (Page) + B (Byte) |
 |  0    |  1       | lnib = A             | Set the low nibble of the memory address: C (Page + B (Byte) to register A value |
-|  1    |  0...F   | Disp.Row=            | Show the data value on the currently selected row of the display |
-|  2    |  0...F   | Wait                 | Wait for the data value delay time (delay from 0 = 1ms to F = 60s)|
-|  3    |  0...F   | Jump back            | Relative jump backwards of data value bytes |
-|  4    |  0...F   | A=                   | Set register A to data value |
+|  1    |  0...F   | Disp.Row=            | Show the Data value on the currently selected row of the display |
+|  2    |  0...F   | Wait                 | Wait for the Data value delay time (delay from 0 = 1ms to F = 60s)|
+|  3    |  0...F   | Jump back            | Relative jump backwards of Data value bytes |
+|  4    |  0...F   | A=                   | Set register A to Data value |
 |  5    |  0       | Row=A                | Set the display Row value from register A value, which should be between 0 and 3 |
 |  5    |  1       | B=A                  | Set register B to register A value|
 |  5    |  2       | C=A                  | Set register C to register A value|
@@ -53,7 +53,7 @@ For example the commands 41 54 would be shown in the editor as:
 |  7    |  3       | A=A+B                | Add register B to register A |
 |  7    |  4       | A=A-B                | Subtract register B from register A |
 |  7    |  5       | A=A*B                | Multiply register A by register B |
-|  7    |  6       | A=A/B                | Divide register A by register B |
+|  7    |  6       | A=A/B                | Divide register A by register B <br/>Note: Attempted division by zero is ignored!|
 |  7    |  7       | A=A and B            | Logically AND the bit values of register A and register B |
 |  7    |  8       | A=A or B             | Logically OR the bits values of register A and register B |
 |  7    |  9       | A=A xor B            | Logically XOR (exclusive or) the bit values of register A and register B |
@@ -63,9 +63,9 @@ For example the commands 41 54 would be shown in the editor as:
 |  7    |  D       | A=A rot&lt;&lt;1     | Rotate register A left  1 bit |
 |  7    |  E       | A=A rot&gt;&gt;1     | Rotate register A right 1 bit |
 |  8    |  0...F   | Select Page          | Select memory Page - Pages are blocks of 16 bytes |
-|  9    |  0...F   | Jump                 | Jump to the byte at position data in the selected memory page |
-|  A    |  0...F   | DCJNZ                | If register C is not zero, decrement C and jump to the byte at position data in the selected memory page |
-|  B    |  0...F   | DDJNZ                | If register D is not zero, decrement D and jump to the byte at position data in the selected memory page |
+|  9    |  0...F   | Jump                 | Jump to the byte at position Data in the selected memory page |
+|  A    |  0...F   | DCJNZ                | If register C is not zero, decrement C and jump to the byte at position Data in the selected memory page |
+|  B    |  0...F   | DDJNZ                | If register D is not zero, decrement D and jump to the byte at position Data in the selected memory page |
 |  C    |  -       | -                    | Skip next instruction ... |
 |  C    |  0       | A==0                 | ... if register A is equal to 0 |
 |  C    |  1       | A>B                  | ... if register A is greater than register B |
@@ -83,8 +83,8 @@ For example the commands 41 54 would be shown in the editor as:
 |  C    |  D       | S1==0                | ... if S2 (micro:bit button B) is not pressed |
 |  C    |  E       | S1==1                | ... if S1 (micro:bit button A) is pressed |
 |  C    |  F       | S1==1                | ... if S2 (micro:bit button A) is pressed |
-|  D    |  0...F   | Call                 | Call subroutine at byte position data in the selected memory page <br/>Note: No nested subroutines allowed!|
+|  D    |  0...F   | Call                 | Call subroutine at byte position Data in the selected memory page <br/>Note: No nested subroutines allowed!|
 |  E    |  0       | Ret                  | Return from subroutine call |
 |  F    |  0       | A = hnib             | Set register A to the high nibble value from the memory address: C (Page) + B (Byte) |
-|  F    |  1       | hnib = A             | Set the low nibble of the memory address: C (Page + B (Byte) to register A value |
+|  F    |  1       | hnib = A             | Set the high nibble of the memory address: C (Page + B (Byte) to register A value |
 

@@ -161,7 +161,7 @@ def run():
             elif DATA>=0x05 and DATA<=0x08:
                 display.set_pixel(9-DATA,Row,9*(A&0x01))
             elif DATA==0x09:
-                pin0.write_analog((A*64)%1023)
+                pin0.write_analog(A*68)
             elif DATA==0x0A:
                 for i in range(4):
                     Dout[i].write_digital((A>>i)&0x01)
@@ -179,7 +179,7 @@ def run():
                 A=D
             elif DATA==0x04:
                 A=Din
-            elif DATA>=0x05 and DATA<=8:
+            elif DATA>=0x05 and DATA<=0x08:
                 A=(Din>>(DATA-5))&0x01
             elif DATA==0x09:
                 A=int(pin1.read_analog()/64)
@@ -200,7 +200,8 @@ def run():
             elif DATA==0x05:
                 A=A*B
             elif DATA==0x06:
-                A=A/B
+                if B:
+                    A=A//B
             elif DATA==0x07:
                 A=A&B
             elif DATA==0x08:

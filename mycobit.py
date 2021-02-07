@@ -1,7 +1,6 @@
 from microbit import *
 import gc
 gc.collect()
-
 MYCO='mycobit'
 DFLT='default'
 

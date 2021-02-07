@@ -1,10 +1,16 @@
 from microbit import *
+import music
+import audio
 import gc
 gc.collect()
-
 MYCO='mycobit'
 DFLT='default'
-
+music_note = ['c4', 'd4', 'e4', 'f4', 'g4', 'a4', 'b4', 'c5', 'd5', 'e5', 'f5', 'g5', 'a5', 'b5', 'c6', 'd6']
+music_tune = [music.JUMP_UP, music.JUMP_DOWN, music.POWER_UP, music.POWER_DOWN]
+audio_sound = [Sound.GIGGLE, Sound.HAPPY, Sound.HELLO, Sound.SAD]
+min_acc = -1024
+max_acc = 1024
+range_acc = max_acc - min_acc
 p=bytearray(256)
 
 def save():
@@ -261,9 +267,38 @@ def run():
             continue
 
         elif INST==0x0E:
-            PC=RET
-            continue
-
+            if DATA==0x00:
+                PC=RET
+                continue
+            elif DATA>=0x01 and DATA<=0x03:
+                if DATA==0x01:
+                    acc_val = accelerometer.get_x()
+                elif DATA==0x02:
+                    acc_val = accelerometer.get_y()
+                elif DATA==0x03:
+                    acc_val = accelerometer.get_z()
+                acc_val = min(max(min_acc, acc_val), max_acc)
+                acc_val = ((acc_val - min_acc) / range_acc) * 16
+                A = int(acc_val)
+            elif DATA==0x04:
+                if compass.is_calibrated == False:
+                    compass.calibrate()
+                A = int((compass.heading() / 360) * 16)
+            elif DATA==0x05:
+                mic_val = int((microphone.sound_level() / 255) * 16)
+                A = mic_val
+            elif DATA==0x06:
+                A = int((display.read_light_level() / 255) * 16)
+            elif DATA==0x07:
+                music.play(music_note[A%len(music_note)])
+            elif DATA==0x08:
+                music.play(music_tune[A%len(music_tune)])
+            elif DATA==0x09:
+               audio.play(audio_sound[A%len(audio_sound)])
+            elif DATA==0x0E:
+                A = pin_logo.is_touched() == False
+            elif DATA==0x0F:
+                A = pin_logo.is_touched() == True
         PC=(PC+1)%256
         A=A&0xF
 

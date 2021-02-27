@@ -11,7 +11,34 @@ Once mycobit has been installed on the micro:bit you can program using only the 
 
 A quick start-up guide to getting mycobit running on your micro:bit.
 
-# Installation
+# Easy Installation
+
+Connect your microbit to your computer and you should see a device window called MICROBIT.
+ 
+Download the file mycobit.hex (or mycobitv2.hex if you have a microbit v2) and copy it to your microbit by dragging the file into the MICROBIT window.
+
+Note that you can load the mycobit.hex on a v2 microbit, but you will not be able to use all of the v2 features. Trying to load the v2 hex file on a microbit v1 will show a MemoryError on the display. You need to load the mycobit.hex on a microbit v1.
+
+The yellow LED on the back of the microbit will flash while mycobit is copied and installed on your microbit.
+
+Four things will be installed on your microbit: The micropython interpreter, the mycobit python program, a test program and a set of default programs which are identical to those built into the original MyCo/TPS boards.
+
+When the transfer is complete, the microbit will reset and you should see an animated pattern on the display LEDs.
+
+The animated pattern is produced by this little mycobit program which you can analyse and play with later:
+
+43 52 43 53 41 54 7B 25 B5 10 60 71 50 A2 3E
+
+Hint: You can change the speed of the animation by changing 25 to anything between 20 (extremely fast) and 2F (extremely slow).
+
+Once you've got tired of watching this animation you can follow the instructions to load the Default MyCo/TPS programs below.
+
+Learn how to use the editor to create your own programs, see First steps in the editor below.
+
+Whenever you want to reset everything, you can simply download the hex file to your microbit, but any stored mycobit program will be overwritten with the animated pattern program.
+
+
+# Manual Installation
 
 mycobit is written in micropython, not makecode. So you'll need an editor for vanilla micro:bit micropython.
 
@@ -21,9 +48,9 @@ Load up the mycobit.py file in mu and download it to your micro:bit.
 
 Reset your micro:bit, and let's get started with mycobit programming!
 
-# First steps in the editor
-
 There's nothing on the display, is it dead? No, it's not dead, it's just doing nothing. You need to add a mycobit program.
+
+# First steps in the editor
 
 Keep button B held down and press and release the reset button.
 When the micro:bit restarts four of the top leds will light up. You're in the mycobit editor!
@@ -317,9 +344,9 @@ Can you guess?
 
 The '4 bit' mycobit implementation was strictly observed, the micro:bit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is not available.
 
-No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C cannot be supported due to space limitations.
+No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C cannot be used on the microbit v1 due to space limitations.
 
-Unfortunately micropython on the micro:bit's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
+Unfortunately micropython on the micro:bit v1's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
 
 Since this was originally written I've discovered the major flaw in the mico:bit version. I was simply too greedy with adding more memory pages than the original TPS. 128 bytes extra storage seems to put it right on the edge of filling the available RAM at boot/compile time. You live and you learn!
 

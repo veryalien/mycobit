@@ -334,21 +334,19 @@ The meowbit has a really interesting wireless SD card add-on which is effectivel
 
 ### myco:clue
 
-The 5th 'bit'! When I get my hands on an Adafruit Clue (currently in transit!), I'll see what I can do with a proper circuitpython version, which will probably feed back into the pre-release meowbit version too.
+The 5th 'bit'! I'll see what I can do with a proper circuitpython version, which will probably feed back into the pre-release meowbit version too.
 
 ### myco:stack, myco:stick, myco:atom
 
-Can you guess?
+Implementations for the M5Stack range of ESP32 devices, each with their own particular I/O components.
 
-# Limitations
+# Limitations (mostly on microbit v1)
 
 The '4 bit' mycobit implementation was strictly observed, the micro:bit display is not used with the built-in display features to scroll messages and show images. Only the top-right hand 4 x 4 pixels are used as a display, but it is still very useful. Light-sensing, via the display leds, is not available.
 
 No SPI or I2C devices are supported. The SPI pins have been used as GPIO pins. I2C cannot be used on the microbit v1 due to space limitations.
 
 Unfortunately micropython on the micro:bit v1's nrf51822 doesn't leave much memory free and it was a struggle to get the latest mycobit.py to be loaded successfully without any memory errors. The source has virtually no comments and lots of pretty whitespace and variable names have been manually omitted, minifying the source didn't make any difference any more.
-
-Since this was originally written I've discovered the major flaw in the mico:bit version. I was simply too greedy with adding more memory pages than the original TPS. 128 bytes extra storage seems to put it right on the edge of filling the available RAM at boot/compile time. You live and you learn!
 
 There are a couple of enhanced shift and rotate instructions in the latest version of the code. But, unfortunately, any further addtions, or even subtle changes to the python code, seem to make the python too large or complex for it to be successfully compiled to byte-code when loaded. If you want to play with the mycobit python source code for your own programs, you can switch things 'on' and 'off' by carefully commenting them out in the mu-editor and then re-loading the modified mycobit.py onto the micro:bit. 
 

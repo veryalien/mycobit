@@ -115,19 +115,14 @@ def serialprg():
                         if c == ':':
                             break
     
-                    uart.write('.')
-                    
                     #read counter
                     c = getNextChar()
                     count = hexToByte(c) << 4
                     c = getNextChar()
                     count += hexToByte(c)
     
-                    printHex8(count)
-    
                     crc = count
 
-                    uart.write('.')
                     #address
                     c = getNextChar()
                     readAddress = hexToByte(c) << 12
@@ -143,33 +138,24 @@ def serialprg():
                     crc += readAddress >> 8
                     crc += readAddress & 0x00FF
     
-                    uart.write('.')
-    
+
                     #reading data type
                     c = getNextChar()
                     type = hexToByte(c) << 4
                     c = getNextChar()
                     type += hexToByte(c)
             
-                    printHex8(type)
-    
                     crc += type
-    
-                    uart.write('.')
-    
+
                     if (type == 0x01):
                         eOfF = True
 
-    
                     #read data bytes
                     for x in range(count):
                         c = getNextChar()
                         value = hexToByte(c) << 4
                         c = getNextChar()
                         value += hexToByte(c)
-    
-                        printHex8(value)
-                        uart.write('.')
 
                         data[x] = value
                         crc += value
@@ -180,14 +166,9 @@ def serialprg():
                     c = getNextChar()
                     readcrc += hexToByte(c)
     
-                    printHex8(readcrc)
-                    uart.write('.')
-    
                     crc += readcrc
                     #check CRC
                     value = crc & 0x00FF
-    
-                    printHex8(value)
     
                     if value == 0:
                         uart.write("ok")

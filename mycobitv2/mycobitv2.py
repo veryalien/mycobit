@@ -1,8 +1,12 @@
+# Button A is PRG or S1
+# BUtton B is SEL or S2
+
 from microbit import *
 import music
 import audio
 import gc
 gc.collect()
+CRLF='\r\n'
 MYCO='mycobit'
 DFLT='default'
 music_note = ['c4', 'd4', 'e4', 'f4', 'g4', 'a4', 'b4', 'c5', 'd5', 'e5', 'f5', 'g5', 'a5', 'b5', 'c6', 'd6']
@@ -11,7 +15,8 @@ audio_sound = [Sound.GIGGLE, Sound.HAPPY, Sound.HELLO, Sound.SAD]
 min_acc = -1024
 max_acc = 1024
 range_acc = max_acc - min_acc
-p=bytearray(256)
+E2END=256
+p=bytearray(E2END)
 
 def save():
     with open(MYCO, 'wb') as mb:
@@ -36,6 +41,199 @@ def set_nib(pb,nib,v):
     else:
         p[pb]=(v<<4)|(p[pb]&0x0F)
 
+def writeln(msg):
+    uart.write(msg)
+    uart.write(CRLF)
+
+def hexToByte (c):
+    if ((c >= '0') and (c <= '9')): 
+        return ord(c) - ord('0')
+    if ((c >= 'A') and (c <= 'F')):
+        return (ord(c) - ord('A')) + 10
+
+def nibbleToHex(value):
+    c = value & 0x0F
+    if ((c >= 0) and (c <= 9)):
+        return c + ord('0')
+    if ((c >= 10) and (c <= 15)):
+        return (c + ord('A')) - 10
+
+def printCheckSum(value):
+    checksum = value & 0xFF
+    checksum = (checksum ^ 0xFF) + 1
+    printHex8(checksum)
+    uart.write(CRLF)
+
+def printHex8(num):
+    tmp=bytearray(2)
+    tmp[0] = nibbleToHex(num >> 4)
+    tmp[1] = nibbleToHex(num)
+    uart.write(tmp)
+
+def printHex16(num):
+    tmp=bytearray(4)
+    tmp[0] = nibbleToHex(num >> 12)
+    tmp[1] = nibbleToHex(num >> 8)
+    tmp[2] = nibbleToHex(num >> 4)
+    tmp[3] = nibbleToHex(num)
+    uart.write(tmp)
+
+def getNextChar():
+    while not uart.any():
+        sleep(10)
+    c=uart.read(1)
+    return chr(c[0])
+
+
+def serialprg():
+    eOfp=False
+    uart.init(baudrate=9600)
+    uart.write(CRLF)
+    writeln('micro_bit_v2')
+    uart.write(CRLF)
+    uart.write('waiting for command:')
+    uart.write(CRLF)
+    uart.write('w: write HEX file, r: read file, e: end')
+    uart.write(CRLF)
+    while not eOfp:
+        while uart.any():
+            c=uart.read(1)
+            ch = chr(c[0])
+            if ch == 'w':
+                #hexfile is comming to programm
+                writeln('ready')
+                eOfF=False
+                addr = 0
+                data=bytearray(32)
+                while True:
+                    for i in range(8):
+                        data[i] = 0xFF
+    
+                    while True:
+                        c = getNextChar()
+                        uart.write(c)
+                        if c == ':':
+                            break
+    
+                    uart.write('.')
+                    
+                    #read counter
+                    c = getNextChar()
+                    count = hexToByte(c) << 4
+                    c = getNextChar()
+                    count += hexToByte(c)
+    
+                    printHex8(count)
+    
+                    crc = count
+
+                    uart.write('.')
+                    #address
+                    c = getNextChar()
+                    readAddress = hexToByte(c) << 12
+                    c = getNextChar()
+                    readAddress += hexToByte(c) << 8
+                    c = getNextChar()
+                    readAddress += hexToByte(c) << 4
+                    c = getNextChar()
+                    readAddress += hexToByte(c)
+    
+                    printHex16(readAddress)
+    
+                    crc += readAddress >> 8
+                    crc += readAddress & 0x00FF
+    
+                    uart.write('.')
+    
+                    #reading data type
+                    c = getNextChar()
+                    type = hexToByte(c) << 4
+                    c = getNextChar()
+                    type += hexToByte(c)
+            
+                    printHex8(type)
+    
+                    crc += type
+    
+                    uart.write('.')
+    
+                    if (type == 0x01):
+                        eOfF = True
+
+    
+                    #read data bytes
+                    for x in range(count):
+                        c = getNextChar()
+                        value = hexToByte(c) << 4
+                        c = getNextChar()
+                        value += hexToByte(c)
+    
+                        printHex8(value)
+                        uart.write('.')
+
+                        data[x] = value
+                        crc += value
+
+                    #read CRC
+                    c = getNextChar()
+                    readcrc = hexToByte(c) << 4
+                    c = getNextChar()
+                    readcrc += hexToByte(c)
+    
+                    printHex8(readcrc)
+                    uart.write('.')
+    
+                    crc += readcrc
+                    #check CRC
+                    value = crc & 0x00FF
+    
+                    printHex8(value)
+    
+                    if value == 0:
+                        uart.write("ok")
+                        #adding value to EEPROM
+                        for x in range(count):
+                            p[readAddress + x] = data[x]
+                    else:
+                        writeln(', CRC Error')
+                        eOfF=True
+
+                    writeln("")
+                    if eOfF: 
+                        break
+                    
+                writeln('endOfFile')
+                save()
+            if ch == 'r':
+                load(MYCO)
+                uart.write('program data:')
+                uart.write(CRLF)
+                checksum = 0
+                for addr in range(E2END):
+                    value = p[addr]
+                    if ((addr % 8) == 0):
+                        if addr > 0:
+                            printCheckSum(checksum)
+                        checksum = 0
+                        uart.write(":08")
+                        checksum += 0x08
+                        printHex16(addr)
+                        checksum += (addr >> 8)
+                        checksum += (addr & 0x00FF)
+                        uart.write("00")
+                    
+                    printHex8(value)
+                    checksum += value
+                
+                printCheckSum(checksum)
+                # ending
+                writeln(":00000001FF")
+            if ch == 'e':
+                uart.write('end')
+                uart.write(CRLF)
+                eOfp = True
+                
+    
 def prg():
     PC=0
     nib=0
@@ -302,6 +500,8 @@ def run():
         PC=(PC+1)%256
         A=A&0xF
 
-if button_b.is_pressed():
+if button_a.is_pressed():
     prg()
+if button_b.is_pressed():
+    serialprg()
 run()

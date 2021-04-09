@@ -90,11 +90,8 @@ def serialprg():
     uart.init(baudrate=9600)
     uart.write(CRLF)
     writeln('micro_bit_v2')
-    uart.write(CRLF)
-    uart.write('waiting for command:')
-    uart.write(CRLF)
-    uart.write('w: write HEX file, r: read file, e: end')
-    uart.write(CRLF)
+    writeln('waiting for command:')
+    writeln('w: write HEX file, r: read file, e: end')
     while not eOfp:
         while uart.any():
             c=uart.read(1)
@@ -111,7 +108,6 @@ def serialprg():
     
                     while True:
                         c = getNextChar()
-                        uart.write(c)
                         if c == ':':
                             break
     
@@ -133,11 +129,8 @@ def serialprg():
                     c = getNextChar()
                     readAddress += hexToByte(c)
     
-                    printHex16(readAddress)
-    
                     crc += readAddress >> 8
                     crc += readAddress & 0x00FF
-    
 
                     #reading data type
                     c = getNextChar()
@@ -172,7 +165,6 @@ def serialprg():
     
                     if value == 0:
                         uart.write("ok")
-                        #adding value to EEPROM
                         for x in range(count):
                             p[readAddress + x] = data[x]
                     else:
@@ -187,8 +179,7 @@ def serialprg():
                 save()
             if ch == 'r':
                 load(MYCO)
-                uart.write('program data:')
-                uart.write(CRLF)
+                writeln('program data:')
                 checksum = 0
                 for addr in range(E2END):
                     value = p[addr]
@@ -210,11 +201,9 @@ def serialprg():
                 # ending
                 writeln(":00000001FF")
             if ch == 'e':
-                uart.write('end')
-                uart.write(CRLF)
+                writeln('end')
                 eOfp = True
-                
-    
+
 def prg():
     PC=0
     nib=0

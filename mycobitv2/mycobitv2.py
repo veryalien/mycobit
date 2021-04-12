@@ -131,7 +131,7 @@ def serialprg():
     
                     crc += readAddress >> 8
                     crc += readAddress & 0x00FF
-
+    
                     #reading data type
                     c = getNextChar()
                     type = hexToByte(c) << 4
@@ -203,7 +203,7 @@ def serialprg():
             if ch == 'e':
                 writeln('end')
                 eOfp = True
-
+                
 def prg():
     PC=0
     nib=0
@@ -470,8 +470,8 @@ def run():
         PC=(PC+1)%256
         A=A&0xF
 
-if button_a.is_pressed():
-    prg()
 if button_b.is_pressed():
+    prg()
+if button_a.is_pressed():
     serialprg()
 run()

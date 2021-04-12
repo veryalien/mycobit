@@ -86,6 +86,7 @@ def getNextChar():
 
 
 def serialprg():
+    display.show(Image.DIAMOND)
     eOfp=False
     uart.init(baudrate=9600)
     uart.write(CRLF)
@@ -97,6 +98,7 @@ def serialprg():
             c=uart.read(1)
             ch = chr(c[0])
             if ch == 'w':
+                display.show(Image.ARROW_S)
                 #hexfile is comming to programm
                 writeln('ready')
                 eOfF=False
@@ -179,6 +181,7 @@ def serialprg():
                 save()
             if ch == 'r':
                 load(MYCO)
+                display.show(Image.ARROW_N)
                 writeln('program data:')
                 checksum = 0
                 for addr in range(E2END):
@@ -203,7 +206,8 @@ def serialprg():
             if ch == 'e':
                 writeln('end')
                 eOfp = True
-                
+    display.clear()
+
 def prg():
     PC=0
     nib=0
